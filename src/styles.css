@@ -1,0 +1,26 @@
+h1, .center-container {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #f6f3f8;
+}
+
+table, th, td {
+  border-style: solid;
+  border-radius: 2;
+  width: 100%;
+  table-layout: fixed;
+}
+
+td {
+  background-color: white;
+}
+
+td:hover{
+  background-color: gray;
+  color: white;
+}
