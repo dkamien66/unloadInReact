@@ -1,55 +1,78 @@
+function daysInCurrentMonth() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const lastDayOfMonth = new Date(year, month+1, 0); // get 0-th day of next month == last day of this month
+    return lastDayOfMonth.getDate();
+}
+
 export default function Calendar({ data }) {
 
-    const currMonth = "January"
-    const currYear = "2026"
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    // The goal is to generate an accurate calendar of the current month.
+    const currYear = new Date().getFullYear(); // what you expect , 2026
+    const currMonth = new Date().getMonth(); // 0-indexed  (0-11)
+    const firstDay = new Date(currYear, currMonth, 1); // what i want to use is firstDay.getDay() for index of day of week
+    const firstDayIndex = firstDay.getDay(); // 0-6
 
     const table = [];
-    for (let week_id = 0; week_id <= 4; week_id++) {
-        (week_id) < 4 ?
-        (table.push(
-            <tr key={week_id}>
-                {[1,2,3,4,5,6,7].map(col => {
-                    let day_id = week_id*7 + col;
-                    let dateStr = `${currYear}-1-${day_id}`
-                    return (
-                        <td
-                            key={day_id}>
-                            #{day_id}
-                            <ul>
-                                {
-                                    data.filter(day => day.date === dateStr).map(day => {
-                                        return <li key={day.date}>{day.description}</li>
-                                    })
-                                }
-                            </ul>
-                        </td>
-                    );
-                })}
-            </tr>
-        )) : 
-        (table.push(
-            <tr>
-                {[1,2,3].map(col => {
-                    let day_id = week_id*7 + col;
-                    let dateStr = `${currYear}-1-${day_id}`
-                    return (
-                        <td 
-                            id={day_id}
-                            key={day_id}>
-                            #{day_id}
-                            <ul>
-                                {
-                                    data.filter(day => day.date === dateStr).map(day => {
-                                        return <li key={day.date}>{day.description}</li>
-                                    })
-                                }
-                            </ul>
-                        </td>
-                    );
-                })}
-            </tr>
-        ))
+    let dayId = 1;
+    for (let weekId = 0; weekId <= 4; weekId++) {
+        if (dayId > daysInCurrentMonth()) {
+            break;
+        }
 
+        if (weekId == 0) {
+            table.push(
+                <tr key={weekId}>
+                    {[0,1,2,3,4,5,6].map(col => {
+                        if (col < firstDayIndex) {
+                            return <td></td>;
+                        } else {
+                            let dateStr = `${currYear}-${currMonth+1}-${dayId}`;
+                            return (
+                                <td
+                                  key={dayId}>
+                                #{dayId++}
+                                    <ul>
+                                        {
+                                            data.filter(day => day.date === dateStr).map(day => {
+                                                return <li key={day.id}>{day.description}</li>
+                                            })
+                                        }
+                                    </ul>
+                                </td>
+                            );
+                        }
+                    })}
+                </tr>
+            )
+        } else {
+            table.push(
+                <tr key={weekId}>
+                    {[0,1,2,3,4,5,6].map(col => {
+                        if (dayId > daysInCurrentMonth()) {
+                            return;
+                        } else {
+                            let dateStr = `${currYear}-${currMonth + 1}-${dayId}`;
+                            return (
+                                <td
+                                  key={dayId}>
+                                #{dayId++}
+                                    <ul>
+                                        {
+                                            data.filter(day => day.date === dateStr).map(day => {
+                                                return <li key={day.id}>{day.description}</li>
+                                            })
+                                        }
+                                    </ul>
+                                </td>
+                            );
+                        }
+                    })}
+                </tr>
+            );
+        }
     }
 
     return (
@@ -57,7 +80,7 @@ export default function Calendar({ data }) {
                 <thead>
                     <tr>
                         <th colSpan="7">
-                        {currMonth + " " + currYear}
+                        {months[currMonth] + " " + currYear}
                         </th>
                     </tr>
                     <tr>

@@ -1,5 +1,12 @@
 import { useState } from 'react';
 
+let nextId = 5;
+const today = new Date();
+const year = today.getFullYear();
+const month = today.getMonth(); // 0-indexed
+const day = today.getDate();
+
+const todayStr = `${year}-${month+1}-${day}`;
 
 export default function UploadData({ onUpload }) {
     const [text, setText] = useState('');
@@ -14,7 +21,11 @@ export default function UploadData({ onUpload }) {
             <button
             onClick={() => {
                 setText('');
-                onUpload(text);
+                onUpload({
+                    id: nextId++,
+                    date: todayStr,
+                    description: text
+                });
             }}>Upload</button>
         </>
     );
