@@ -13,5 +13,15 @@ export const initialData = [
     id : 2,
     date: "2026-1-5",
     description: "I ate lots of Korean food today. I feel very happy."
-}
+},
+{
+    id : 3,
+    date: "2026-1-6",
+    description: "Ran 1.5 miles at West High. Feeling good about that."
+},
+{
+    id : 4,
+    date: "2026-1-6",
+    description: "Ate a blueberry muffin. I was so happy."
+},
 ]

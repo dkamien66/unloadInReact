@@ -1,14 +1,8 @@
 import { useState } from 'react';
 
 let nextId = 5;
-const today = new Date();
-const year = today.getFullYear();
-const month = today.getMonth(); // 0-indexed
-const day = today.getDate();
 
-const todayStr = `${year}-${month+1}-${day}`;
-
-export default function UploadData({ onUpload }) {
+export default function UploadData({ onUpload, todayStr }) {
     const [text, setText] = useState('');
 
     return (

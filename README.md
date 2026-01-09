@@ -2,7 +2,7 @@ Trying to receate this project experience https://www.linkedin.com/feed/update/u
 
 How to run this project:
 
-1. Start the virtual environment
+1. Start the virtual environment in root directory
    `source .venv/bin/activate`
 
 2. Install all dependencies
@@ -15,6 +15,10 @@ How to run this project:
    `ollama serve`
 
 4. Run the backend
+   `node src/backend/backend.js`
+
+5. Run the frontend
+   `cd src/frontend`
    `npm start`
 
 \*\*Problems I encountered
@@ -28,3 +32,8 @@ Backend = Node + Ollama (port 3001)
 Frontend = React (port 3000)
 
 I think I need to learn express app and json more...
+
+Having this error:
+"Access to fetch at 'http://localhost:3001/chat' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource."
+
+- CORS is Cross-Origin Resource Sharing
