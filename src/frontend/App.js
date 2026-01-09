@@ -13,12 +13,17 @@ const todayStr = `${currYear}-${currMonth+1}-${currDay}`;
 export default function App() {
   const [data, setData] = useState(initialData);
   const [summarySetting, setSummarySetting] = useState('Today');
+  const [aiResponse, setAiResponse] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleUpload(newEntry) {
     setData([...data, newEntry]);
   }
 
   const handleWrap = async (setting) => {
+    setIsLoading(true);
+    setAiResponse(null);
+    
     // These conditions follow this algorithm:
       // Find the relevant entries
       // Construct text
@@ -34,7 +39,8 @@ export default function App() {
       todayText += "Please give me a quick review of the emotions I felt in 3 sentences at most."
 
       const response = await getAIResponse(todayText);
-      alert(response);
+      setAiResponse(response);
+      setIsLoading(false);
     } else if (setting == 'Past Week') {
       // find all entries of the last 7 days (including today)
       const arrayOfDateStr = [];
@@ -56,7 +62,8 @@ export default function App() {
       }
       // get AI response
       const response = await getAIResponse(weekText);
-      alert(response);
+      setAiResponse(response);
+      setIsLoading(false);
       } else if (setting == 'Past Month') {
         // find all entries of the past 31 days
         const arrayOfDateStr = [];
@@ -76,8 +83,13 @@ export default function App() {
           monthText += entry.description + " ";
         }
         const response = await getAIResponse(monthText);
-        alert(response);
+        setAiResponse(response);
+        setIsLoading(false);
     }
+  }
+
+  const closeResponseCard = () => {
+    setAiResponse(null);
   }
   
   return (
@@ -93,8 +105,15 @@ export default function App() {
       <Calendar data={data}/>
       <br /><br />
       <div className="center-container">
-        <button onClick={() => handleWrap(summarySetting)}>Wrap It Up!</button>
+        <button 
+          className="wrap-button"
+          onClick={() => handleWrap(summarySetting)}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Loading...' : 'Wrap It Up!'}
+        </button>
         <select 
+          className="time-select"
           value={summarySetting}
           onChange={(e) => setSummarySetting(e.target.value)}
         >
@@ -102,8 +121,17 @@ export default function App() {
           <option value="Past Week">Past Week</option>
           <option value="Past Month">Past Month</option>
         </select>
-      </div>      
+      </div>
 
+      {aiResponse && (
+        <div className="response-card-overlay" onClick={closeResponseCard}>
+          <div className="response-card" onClick={(e) => e.stopPropagation()}>
+            <button className="close-button" onClick={closeResponseCard}>×</button>
+            <h2 className="response-title">Your Reflection</h2>
+            <div className="response-content">{aiResponse}</div>
+          </div>
+        </div>
+      )}
 
       {/* <ul>
         {data.map(data => <li key={data.id}>{data.description}</li>)}
