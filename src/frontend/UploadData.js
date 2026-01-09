@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { initialData } from "../placeholder_data/data.js";
 
-let nextId = 5;
+let nextId = initialData.length;
 
 export default function UploadData({ onUpload, todayStr }) {
     const [text, setText] = useState('');

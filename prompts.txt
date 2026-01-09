@@ -1,0 +1,9 @@
+Q. What can I prompt the AI? Below is a sample prompt:
+
+"Hi gemma3. Today I felt this way {data}
+Please give me a quick review of the emotions I felt in the following format:
+'Your most common emotion today was _____ because of ____'"
+
+Q. Does summaritive data become more useful the more days it covers?
+A. I think weekly, monthly, yearly statistics mean more. They feel more significant.
+let's try implementing these time lengths.

@@ -14,12 +14,16 @@ export default function App() {
   const [data, setData] = useState(initialData);
   const [summarySetting, setSummarySetting] = useState('Today');
 
-
   function handleUpload(newEntry) {
     setData([...data, newEntry]);
   }
 
   const handleWrap = async (setting) => {
+    // These conditions follow this algorithm:
+      // Find the relevant entries
+      // Construct text
+      // Send to backend to get AI reflection
+      // Display
     if (setting === 'Today') {
       const todayEntries = data.filter(day => day.date === todayStr);
 
@@ -31,6 +35,48 @@ export default function App() {
 
       const response = await getAIResponse(todayText);
       alert(response);
+    } else if (setting == 'Past Week') {
+      // find all entries of the last 7 days (including today)
+      const arrayOfDateStr = [];
+      let timeDiff = 518400000 // first, set to 6 days before today (in ms)
+      for (let i = 6; i >= 1; i--) {
+        const newDate = new Date(today.getTime() - timeDiff);
+        const newDateStr = `${newDate.getFullYear()}-${newDate.getMonth() + 1}-${newDate.getDate()}`;
+        arrayOfDateStr.push(newDateStr);
+        timeDiff -= 86400000; // ms in a day
+      }
+      arrayOfDateStr.push(todayStr);
+
+      // Now that I have the relevant dates in correct format, filter
+      const relevantEntries = data.filter(day => arrayOfDateStr.includes(day.date));
+      // create text
+      let weekText = "Hi gemma3. Please give me a clear, concise review of my top 3 emotions and their causes in the following format (fill in the blanks based on the data I give you only): '#1 _____ because of ____, #2 _____ because of ______, #3 ____ because of ______. Here is the data: ";
+      for (const entry of relevantEntries) {
+        weekText += entry.description + " ";
+      }
+      // get AI response
+      const response = await getAIResponse(weekText);
+      alert(response);
+      } else if (setting == 'Past Month') {
+        // find all entries of the past 31 days
+        const arrayOfDateStr = [];
+        let timeDiff = 2592000000; // set to 30 days before today
+        for (let i = 30; i >= 1; i--) {
+          const newDate = new Date(today.getTime() - timeDiff);
+          const newDateStr = `${newDate.getFullYear()}-${newDate.getMonth() + 1}-${newDate.getDate()}`;
+          arrayOfDateStr.push(newDateStr);
+          timeDiff -= 86400000;
+        }
+        arrayOfDateStr.push(todayStr);
+        console.log(arrayOfDateStr);
+
+        const relevantEntries = data.filter(day => arrayOfDateStr.includes(day.date));
+        let monthText = "Hi gemma3. Please give me a clear, concise review of my top 3 emotions and their causes in the following format (fill in the blanks based on the data I give you only): '#1 _____ because of ____, #2 _____ because of ______, #3 ____ because of ______. Here is the data: ";
+        for (const entry of relevantEntries) {
+          monthText += entry.description + " ";
+        }
+        const response = await getAIResponse(monthText);
+        alert(response);
     }
   }
   
@@ -53,8 +99,8 @@ export default function App() {
           onChange={(e) => setSummarySetting(e.target.value)}
         >
           <option value="Today">Today</option>
-          <option value="This Week">This Week</option>
-          <option value="This Month">This Month</option>
+          <option value="Past Week">Past Week</option>
+          <option value="Past Month">Past Month</option>
         </select>
       </div>      
 
