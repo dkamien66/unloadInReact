@@ -7,3 +7,6 @@ Please give me a quick review of the emotions I felt in the following format:
 Q. Does summaritive data become more useful the more days it covers?
 A. I think weekly, monthly, yearly statistics mean more. They feel more significant.
 let's try implementing these time lengths.
+
+
+"Hi gemma3. Please give me a clear, concise review of my top 3 emotions and their causes in the following format (fill in the blanks based on the data I give you only): '#1 _____ because of ____, #2 _____ because of ______, #3 ____ because of ______. Here is the data: ";

@@ -3,7 +3,7 @@ import { initialData } from "../placeholder_data/data.js";
 
 let nextId = initialData.length;
 
-export default function UploadData({ onUpload, todayStr }) {
+export default function UploadData({ onUpload }) {
     const [text, setText] = useState('');
 
     return (
@@ -16,11 +16,7 @@ export default function UploadData({ onUpload, todayStr }) {
             <button
             onClick={() => {
                 setText('');
-                onUpload({
-                    id: nextId++,
-                    date: todayStr,
-                    description: text
-                });
+                onUpload(text);
             }}>Upload</button>
         </>
     );

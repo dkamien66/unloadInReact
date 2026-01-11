@@ -37,3 +37,6 @@ Having this error:
 "Access to fetch at 'http://localhost:3001/chat' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource."
 
 - CORS is Cross-Origin Resource Sharing
+
+- How do I go about adding voice-to-text functionality?
+  -- CursorAI first suggests the JavaScript Web Speech API (https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)

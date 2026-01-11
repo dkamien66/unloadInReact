@@ -62,7 +62,28 @@ button {
   outline: none;
 }
 
-button:not(.wrap-button):not(.close-button) {
+.circle-button {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+button.cancel-button {
+  background-color: red;
+  color: white;
+}
+
+button.confirm-button {
+  background-color: green;
+  color: white;
+}
+
+div.cancel-confirm-button-container {
+  display:flex;
+  justify-content: space-between;
+}
+
+button:not(.wrap-button):not(.close-button):not(.cancel-button):not(.confirm-button) {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
@@ -97,7 +118,7 @@ button:not(.wrap-button):not(.close-button):active {
   cursor: not-allowed;
 }
 
-.time-select {
+.select {
   padding: 12px 18px;
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 25px;
@@ -110,13 +131,13 @@ button:not(.wrap-button):not(.close-button):active {
   font-weight: 500;
 }
 
-.time-select:hover {
+.select:hover {
   border-color: white;
   background: white;
   transform: scale(1.02);
 }
 
-.time-select:focus {
+.select:focus {
   border-color: white;
   background: white;
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
