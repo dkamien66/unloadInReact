@@ -40,3 +40,10 @@ Having this error:
 
 - How do I go about adding voice-to-text functionality?
   -- CursorAI first suggests the JavaScript Web Speech API (https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
+
+\*Persistent Data Storage
+
+- MySQL with Docker
+  `docker pull mysql`
+  `docker run --name mysql1 -d -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql`
+  container ID is 052eaa5b1635bf2abb9fd650d26d062112ea3a9affc1a952efafb9bfea7cc520
