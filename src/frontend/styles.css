@@ -51,6 +51,10 @@ input::placeholder {
   color: #999;
 }
 
+input.response-content {
+  background-color: Aliceblue;
+}
+
 button {
   padding: 12px 24px;
   border: none;
@@ -146,11 +150,12 @@ button:not(.wrap-button):not(.close-button):active {
 /* Calendar Styling */
 table {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   border-collapse: separate;
   border-spacing: 10px;
   background: transparent;
+  table-layout: fixed;
 }
 
 thead th {
@@ -185,11 +190,13 @@ td {
   padding: 15px;
   border-radius: 15px;
   vertical-align: top;
-  min-height: 120px;
+  width: calc(100% / 7);
+  height: 150px;
   border: 2px solid transparent;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: relative;
+  overflow: hidden;
 }
 
 td:hover {
@@ -325,6 +332,11 @@ td:hover li {
   transform: rotate(90deg) scale(0.95);
 }
 
+button.edit-save-delete {
+  font-size: 12px;
+  padding: 10px;
+}
+
 .response-title {
   margin: 0 0 20px 0;
   color: #667eea;
@@ -348,6 +360,8 @@ td:hover li {
 
   table {
     border-spacing: 5px;
+    table-layout: fixed;
+    width: 100%
   }
 
   td {

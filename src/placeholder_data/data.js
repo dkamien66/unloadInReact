@@ -17,7 +17,7 @@ export const initialData = [
 {
     id: 3,
     date: "2026-1-4",
-    description: "I met my friend Eric and I was frustrated by his attitude with reading. I put this anger on my mom and I felt very bad."
+    description: "I met my friend John and I was frustrated by his attitude with reading. I put this anger on my mom and I felt very bad."
 }, 
 {
     id : 4,

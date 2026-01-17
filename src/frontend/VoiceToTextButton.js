@@ -25,7 +25,6 @@ export default function VoiceToTextButton({ onUpload }) {
         setIsListening(false);
         const text = event.results[0][0].transcript;
         setTranscription(text);
-        // onUpload(text);
     }
 
     recognition.onspeechend = () => {
@@ -65,7 +64,13 @@ export default function VoiceToTextButton({ onUpload }) {
                 <div className="response-card-overlay" onClick={closeResponseCard}>
                     <div className="response-card" onClick={(e) => e.stopPropagation()}>
                         <h2 className="response-title">Here is what was heard:</h2>
-                        <div className="response-content">{transcription}</div>
+                        <input 
+                            className="response-content"
+                            type="text"
+                            value={transcription}
+                            onChange={(e) => setTranscription(e.target.value)}
+                            required
+                            autoFocus />
                         <br />
                         <div className="cancel-confirm-button-container">
                             <button className="cancel-button" onClick={closeResponseCard}>Cancel</button> 

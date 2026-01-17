@@ -22,7 +22,6 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   function handleUpload(text) {
-    console.log(text);
     setData([
       ...data,
       {
@@ -91,7 +90,6 @@ export default function App() {
           timeDiff -= 86400000;
         }
         arrayOfDateStr.push(todayStr);
-        console.log(arrayOfDateStr);
 
         const relevantEntries = data.filter(day => arrayOfDateStr.includes(day.date));
         request += "The following is how I felt the past month: ";
@@ -122,7 +120,7 @@ export default function App() {
           onUpload={handleUpload} />
       </div>
       <br /><br /><br />
-      <Calendar data={data}/>
+      <Calendar data={data} setData={setData}/>
       <br /><br />
       <div className="center-container">
         <button 
